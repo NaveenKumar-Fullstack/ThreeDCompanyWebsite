@@ -2,6 +2,8 @@
 
 import React from 'react'
 import useInView from '@/hooks/useInView'
+import { Users, Briefcase, Trophy, Check, Crown, Rocket, Settings } from "lucide-react"
+import { useCounter } from "./useCounter"
 
 const TechCardWrapper = ({ plan, index }) => {
   const [ref, isInView] = useInView()
@@ -12,109 +14,159 @@ const TechCardWrapper = ({ plan, index }) => {
   )
 }
 
+
+
 const TechCard = ({ plan, index, isInView }) => {
-  const isHighlighted = plan.name === 'Premium'
+  const isHighlighted = plan.name === "Premium"
+
+  const getIcon = () => {
+    if (plan.name === "Premium") return Crown
+    if (plan.name === "Standard") return Rocket
+    return Settings
+  }
+
+  const Icon = getIcon()
 
   return (
-    <div className={`group relative overflow-hidden rounded-3xl transition duration-500 ${isInView ? 'animate-scroll-up' : 'opacity-0'} ${isInView ? `animate-stagger-${(index % 6) + 1}` : ''} h-full`}>
-      {/* Glow effect for Premium */}
-      {isHighlighted && (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-600 rounded-3xl z-0"></div>
-          <div className="absolute -inset-0.5 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-3xl opacity-0 group-hover:opacity-100 blur transition duration-500 z-0"></div>
-        </>
-      )}
+    <div className="group perspective-[1200px]">
 
-      <div className={`relative rounded-3xl overflow-hidden h-full backdrop-blur-xl transition duration-300 flex flex-col ${
-        isHighlighted 
-          ? 'bg-blue-600/95 shadow-2xl shadow-blue-500/50 transform group-hover:scale-105 border border-yellow-400/50 group-hover:border-yellow-300' 
-          : 'bg-gradient-to-br from-slate-900/95 to-slate-800/95 border border-white/10 group-hover:border-cyan-400/50 shadow-xl group-hover:shadow-2xl group-hover:shadow-cyan-500/20'
-      }`}>
-        
-        {/* Premium Ribbon */}
+      <div
+        className={`
+        tilt-card
+        relative p-8 rounded-2xl
+        bg-[#0b1220]
+        border border-white/10
+        shadow-[0_20px_60px_rgba(0,0,0,0.7)]
+        transition-all duration-500
+        group-hover:-translate-y-4
+        group-hover:shadow-[0_50px_100px_rgba(0,0,0,0.9)]
+        flex flex-col h-full
+        ${isInView ? "animate-scroll-up" : "opacity-0"}
+        ${isInView ? `animate-stagger-${(index % 6) + 1}` : ""}
+        `}
+      >
+
+        {/* Premium Glow */}
         {isHighlighted && (
-          <div className="absolute top-0 right-0 w-55 h-10 bg-gradient-to-r from-yellow-400 to-orange-400 transform rotate-45 translate-x-12 -translate-y-2 shadow-lg">
-            <span className="absolute text-xs font-black text-blue-900 top-2 right-8">BEST VALUE</span>
-          </div>
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-yellow-400/10 via-transparent to-orange-400/10 pointer-events-none"></div>
         )}
 
-        {/* Plan Badge */}
-        <div className="relative pt-8 pb-3 px-6">
-          <div className={`inline-block rounded-full px-7 py-2.5 font-bold text-xs uppercase tracking-widest mb-8 shadow-lg transition ${
-            isHighlighted 
-              ? 'bg-gradient-to-r from-yellow-300 to-orange-400 text-blue-900 shadow-yellow-500/50' 
-              : 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-orange-500/30'
-          }`}>
-            {plan.badge}
+        {/* Icon */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="
+            w-14 h-14 rounded-xl flex items-center justify-center
+            bg-[#1e293b]
+            shadow-[0_10px_30px_rgba(0,0,0,0.9),
+                    inset_0_2px_6px_rgba(255,255,255,0.05)]
+            transition duration-500
+            group-hover:scale-110 group-hover:rotate-6
+          ">
+            <Icon className={`${isHighlighted ? "text-yellow-400" : "text-cyan-400"}`} size={26} />
           </div>
+
+          {isHighlighted && (
+            <span className="text-xs font-bold text-yellow-300 border border-yellow-400/40 px-3 py-1 rounded-full">
+              BEST
+            </span>
+          )}
         </div>
 
-        {/* Price Section */}
-        <div className="px-6 pb-8 relative">
+        {/* Plan Name */}
+        <h3 className="text-2xl font-bold text-white mb-2">
+          {plan.name}
+        </h3>
+
+        {/* Price */}
+        <div className="mb-6">
           {plan.originalPrice && (
-            <div className={`text-sm font-bold mb-3 ${isHighlighted ? 'text-yellow-100' : 'text-gray-500'} line-through uppercase tracking-wide`}>
+            <p className="text-gray-500 line-through text-sm">
               ₹{plan.originalPrice.toLocaleString()}
-            </div>
+            </p>
           )}
-          <div className="flex items-baseline gap-1 mb-3">
-            <div className={`text-6xl font-black ${isHighlighted ? 'text-yellow-300' : 'text-white'}`}>
-              {typeof plan.price === 'number' ? '₹' : ''}
-            </div>
-            <div className={`text-4xl font-black ${isHighlighted ? 'text-yellow-300' : 'text-white'}`}>
-              {typeof plan.price === 'number' ? plan.price.toLocaleString() : plan.price}
-            </div>
+
+          <div className="text-4xl font-black text-white">
+            {typeof plan.price === "number" ? `₹${plan.price}` : "Custom"}
           </div>
-          {/* <div className={`text-xs font-bold uppercase tracking-wider ${isHighlighted ? 'text-blue-100' : 'text-gray-400'}`}>
-            (+ 18% GST {plan.gst})
-          </div> */}
         </div>
 
         {/* Divider */}
-        <div className={`mx-6 h-0.5 ${isHighlighted ? 'bg-gradient-to-r from-yellow-300 via-yellow-200 to-transparent' : 'bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent'} mb-6`}></div>
+        <div className="h-[1px] bg-white/10 mb-6"></div>
 
-        {/* Features Section */}
-        <div className="px-6 pb-8 flex-grow">
-          <h3 className={`text-sm font-black uppercase tracking-widest mb-6 ${isHighlighted ? 'text-yellow-100' : 'text-cyan-300'}`}>
-            Features Includes
-          </h3>
-          <ul className="space-y-3.5">
-            {plan.features.map((feature, idx) => (
-              <li key={idx} className="flex items-start gap-3 group/item hover:translate-x-1 transition">
-                <span className={`text-lg mt-0.5 flex-shrink-0 transform group-hover/item:scale-125 transition ${isHighlighted ? 'text-yellow-300' : 'text-cyan-400'}`}>✓</span>
-                <span className={`text-sm font-semibold leading-relaxed ${isHighlighted ? 'text-blue-50 group-hover/item:text-yellow-100' : 'text-gray-300 group-hover/item:text-white'} transition`}>
-                  {feature}
-                </span>
-              </li>
-            ))}
-          </ul>
+        {/* Features */}
+        <ul className="space-y-3 mb-8 flex-grow">
+          {plan.features.map((feature, i) => (
+            <li key={i} className="flex items-start gap-3 group/item">
+              <Check
+                size={18}
+                className={`${isHighlighted ? "text-yellow-400" : "text-cyan-400"} mt-1`}
+              />
+              <span className="text-gray-300 text-sm group-hover/item:text-white transition">
+                {feature}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Button */}
+        <button
+          onClick={() => window.location.href = 'tel:+918709472551'}
+          className={`
+            py-4 rounded-xl font-bold transition duration-300
+            ${isHighlighted
+              ? "bg-yellow-400 text-black hover:bg-yellow-300"
+              : "bg-cyan-500 text-white hover:bg-cyan-400"}
+          `}
+        >
+          Get Started →
+        </button>
+
+      </div>
+    </div>
+  )
+}
+
+
+const StatCard = ({ icon: Icon, value, label }) => {
+  const [ref, isInView] = useInView()
+  const count = useCounter(value, isInView)
+
+  return (
+    <div ref={ref} className="group perspective-[1200px]">
+
+      <div className="
+        tilt-card
+        relative p-8 rounded-2xl
+        bg-[#0f172a]
+        border border-white/10
+        shadow-[0_20px_50px_rgba(0,0,0,0.6)]
+        transition-all duration-500
+        group-hover:-translate-y-3
+        group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.9)]
+        text-center
+      ">
+
+        {/* Icon */}
+        <div className="mb-4 flex justify-center">
+          <div className="
+            w-14 h-14 flex items-center justify-center rounded-xl
+            bg-[#1e293b]
+            shadow-[0_10px_25px_rgba(0,0,0,0.8),
+                    inset_0_2px_4px_rgba(255,255,255,0.05)]
+          ">
+            <Icon size={26} className="text-cyan-400" />
+          </div>
         </div>
 
-        {/* Call Now Button */}
-        <div className="px-6 pb-8">
-          <button 
-            onClick={() => window.location.href = 'tel:+918709472551'}
-            className={`w-full py-4 px-6 rounded-xl font-bold text-base uppercase tracking-widest transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-2xl relative overflow-hidden group/btn ${
-            isHighlighted 
-              ? 'bg-gradient-to-r from-yellow-400 via-yellow-300 to-orange-400 text-blue-900 hover:shadow-yellow-400/60' 
-              : 'bg-gradient-to-r from-orange-500 via-orange-600 to-red-500 text-white hover:shadow-orange-500/60'
-          }`}>
-            {/* Animated background shine effect */}
-            <div className={`absolute inset-0 ${isHighlighted ? 'bg-gradient-to-r from-transparent via-white/30 to-transparent' : 'bg-gradient-to-r from-transparent via-white/20 to-transparent'} transform -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500`}></div>
-            
-            {/* Button content */}
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              <span>📞 Call Now</span>
-              <svg className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-          </button>
-
-          {/* Additional CTA Text */}
-          <p className={`text-xs font-semibold text-center mt-4 ${isHighlighted ? 'text-yellow-100' : 'text-gray-400'} uppercase tracking-wide`}>
-            Get started in minutes
-          </p>
+        {/* Counter */}
+        <div className="text-5xl font-black text-white mb-2">
+          {count}+
         </div>
+
+        {/* Label */}
+        <p className="text-gray-400 font-semibold tracking-wide">
+          {label}
+        </p>
+
       </div>
     </div>
   )
@@ -211,28 +263,10 @@ const Technologies = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-purple-600/20 to-pink-600/20 rounded-3xl blur-2xl"></div>
           <div className="relative overflow-hidden rounded-3xl p-1 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-600">
             <div className="relative bg-gradient-to-br from-slate-900/95 to-slate-800/95 rounded-[26px] p-12 md:p-16 backdrop-blur-xl border border-white/10">
-              <div className="grid md:grid-cols-3 gap-12 text-center">
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 to-cyan-500/10 rounded-2xl transform scale-0 group-hover:scale-100 transition duration-300"></div>
-                  <div className="relative">
-                    <div className="text-6xl md:text-7xl font-black bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition duration-300 transform">100+</div>
-                    <p className="text-gray-300 font-bold uppercase tracking-wide group-hover:text-cyan-300 transition">Clients Worldwide</p>
-                  </div>
-                </div>
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-purple-500/10 rounded-2xl transform scale-0 group-hover:scale-100 transition duration-300"></div>
-                  <div className="relative">
-                    <div className="text-6xl md:text-7xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition duration-300 transform">500+</div>
-                    <p className="text-gray-300 font-bold uppercase tracking-wide group-hover:text-purple-300 transition">Projects Delivered</p>
-                  </div>
-                </div>
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-400/10 to-orange-500/10 rounded-2xl transform scale-0 group-hover:scale-100 transition duration-300"></div>
-                  <div className="relative">
-                    <div className="text-6xl md:text-7xl font-black bg-gradient-to-r from-pink-500 to-orange-500 bg-clip-text text-transparent mb-3 group-hover:scale-110 transition duration-300 transform">10+</div>
-                    <p className="text-gray-300 font-bold uppercase tracking-wide group-hover:text-orange-300 transition">Years of Experience</p>
-                  </div>
-                </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                <StatCard icon={Users} value={100} label="Clients Worldwide" />
+                <StatCard icon={Briefcase} value={500} label="Projects Delivered" />
+                <StatCard icon={Trophy} value={10} label="Years Experience" />
               </div>
             </div>
           </div>

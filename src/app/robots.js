@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: 'https://vpm-solutions.com/sitemap.xml',
+    sitemap: 'https://SML-solutions.com/sitemap.xml',
   }
 }

@@ -15,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Contact Us | Stack Mints Labs",
     description: "Get in touch with our team for your IT solutions needs in Jharkhand, India.",
-    url: 'https://vpm-solutions.com/contact',
+    url: 'https://SML-solutions.com/contact',
   },
 }
 

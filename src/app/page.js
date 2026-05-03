@@ -32,8 +32,8 @@ const HomePage = () => {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Stack Mints Labs",
-            "url": "https://vpm-solutions.com",
-            "logo": "https://vpm-solutions.com/image/companylogo.png",
+            "url": "https://SML-solutions.com",
+            "logo": "https://SML-solutions.com/image/companylogo.png",
             "description": "Leading IT solutions provider specializing in web development, mobile applications, and digital transformation.",
             "address": {
               "@type": "PostalAddress",
@@ -61,10 +61,10 @@ const HomePage = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Stack Mints Labs",
-            "url": "https://vpm-solutions.com",
+            "url": "https://SML-solutions.com",
             "potentialAction": {
               "@type": "SearchAction",
-              "target": "https://vpm-solutions.com/search?q={search_term_string}",
+              "target": "https://SML-solutions.com/search?q={search_term_string}",
               "query-input": "required name=search_term_string"
             }
           })

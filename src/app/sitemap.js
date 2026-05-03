@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://vpm-solutions.com'
+  const baseUrl = 'https://SML-solutions.com'
   const currentDate = new Date().toISOString()
 
   return [

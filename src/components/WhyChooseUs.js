@@ -2,6 +2,7 @@
 
 import React from 'react'
 import useInView from '@/hooks/useInView'
+import { useRef } from "react"
 
 const ReasonCardWrapper = ({ reason, index }) => {
   const [ref, isInView] = useInView()
@@ -12,76 +13,134 @@ const ReasonCardWrapper = ({ reason, index }) => {
   )
 }
 
+
 const ReasonCard = ({ reason, index, isInView }) => {
   return (
-    <div className={`group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl shadow-xl hover:shadow-3xl transition duration-500 border border-white/20 hover:border-cyan-400/40 hover:bg-white/15 ${isInView ? 'animate-scroll-up' : 'opacity-0'} ${isInView ? `animate-stagger-${(index % 6) + 1}` : ''}`}>
-      {/* Number positioned outside the card */}
-      <div className="absolute -top-10 -left-10">
-        <div className="relative w-32 h-32">
-          {/* Outer ring */}
-          <div className="absolute inset-2 rounded-full border-2 border-cyan-400/20 group-hover:border-cyan-400/40 transition-all duration-500 group-hover:rotate-180" style={{ transformOrigin: 'center' }}></div>
+    <div className="group perspective-[1200px]">
 
-          {/* Lightning bolts around */}
-          <svg className="absolute top-0 right-2 w-5 h-5 text-cyan-400/70 group-hover:text-cyan-300 transition-all group-hover:scale-125" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
-          </svg>
-          <svg className="absolute bottom-2 left-0 w-4 h-4 text-purple-400/70 group-hover:text-purple-300 transition-all group-hover:scale-125" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
-          </svg>
+      <div
+        className={`
+        tilt-card
+        relative p-8 rounded-2xl
+        bg-[#0f172a] 
+        border border-white/10
+        shadow-[0_20px_50px_rgba(0,0,0,0.6)]
+        transition-all duration-500
+        group-hover:-translate-y-3
+        group-hover:shadow-[0_40px_80px_rgba(0,0,0,0.9)]
+        
+        ${isInView ? "animate-scroll-up" : "opacity-0"}
+        ${isInView ? `animate-stagger-${(index % 6) + 1}` : ""}
+        `}
+      >
 
-          {/* Number with enhanced styling */}
-          <div className="relative flex items-center justify-center h-full">
-            <div className="relative text-7xl font-black leading-none select-none">
-              {/* Main gradient number */}
-              <div className="relative bg-gradient-to-br from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent group-hover:from-cyan-200 group-hover:via-blue-300 group-hover:to-purple-400 transition-all duration-500">
-                {reason.number}
-              </div>
+        {/* 🔢 3D Number Badge */}
+        <div className="absolute -top-6 -right-6">
+          <div className="
+            w-16 h-16 rounded-xl
+            bg-[#1e293b]
+            flex items-center justify-center
+            text-white font-bold text-xl
 
-              {/* Crack overlay SVG */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                {/* Main diagonal cracks */}
-                <line x1="25" y1="15" x2="75" y2="85" stroke="url(#crack-gradient-1)" strokeWidth="2" strokeLinecap="round" strokeDasharray="3,2" />
-                <line x1="35" y1="5" x2="65" y2="95" stroke="url(#crack-gradient-2)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4,3" />
-                <line x1="75" y1="25" x2="25" y2="75" stroke="url(#crack-gradient-3)" strokeWidth="2" strokeLinecap="round" strokeDasharray="3,2" />
-
-                {/* Branch cracks */}
-                <polyline points="40,30 45,40 42,50" fill="none" stroke="rgba(6, 182, 212, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <polyline points="60,50 55,60 58,70" fill="none" stroke="rgba(139, 92, 246, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <polyline points="50,20 48,30 52,40" fill="none" stroke="rgba(96, 165, 250, 0.5)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-
-                {/* Small fracture details */}
-                <circle cx="35" cy="35" r="1.5" fill="rgba(6, 182, 212, 0.7)" />
-                <circle cx="65" cy="65" r="1.5" fill="rgba(139, 92, 246, 0.7)" />
-                <circle cx="50" cy="50" r="1" fill="rgba(96, 165, 250, 0.6)" />
-
-                {/* Define gradients for cracks */}
-                <defs>
-                  <linearGradient id="crack-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.8 }} />
-                    <stop offset="100%" style={{ stopColor: 'rgb(139, 92, 246)', stopOpacity: 0.8 }} />
-                  </linearGradient>
-                  <linearGradient id="crack-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: 'rgb(139, 92, 246)', stopOpacity: 0.7 }} />
-                    <stop offset="100%" style={{ stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.7 }} />
-                  </linearGradient>
-                  <linearGradient id="crack-gradient-3" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: 'rgb(96, 165, 250)', stopOpacity: 0.8 }} />
-                    <stop offset="100%" style={{ stopColor: 'rgb(168, 85, 247)', stopOpacity: 0.8 }} />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
+            shadow-[0_10px_25px_rgba(0,0,0,0.8),
+                    inset_0_2px_4px_rgba(255,255,255,0.05),
+                    inset_0_-2px_6px_rgba(0,0,0,0.6)]
+            
+            transform transition duration-500
+            group-hover:scale-110 group-hover:-translate-y-1
+          ">
+            {reason.number}
           </div>
         </div>
-      </div>
 
-      <div className="relative z-10">
-        <h3 className="text-2xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r from-cyan-400 to-purple-600 group-hover:bg-clip-text transition-all duration-500">{reason.title}</h3>
-        <p className="text-gray-300 leading-relaxed group-hover:text-white transition-all duration-300">{reason.description}</p>
+        {/* Content */}
+        <h3 className="text-xl font-bold text-white mb-3">
+          {reason.title}
+        </h3>
+
+        <p className="text-gray-400 leading-relaxed">
+          {reason.description}
+        </p>
+
+        {/* Bottom subtle line */}
+        <div className="mt-6 h-[2px] w-0 bg-white/20 
+        transition-all duration-500 group-hover:w-full"></div>
+
       </div>
     </div>
   )
 }
+
+// const ReasonCard = ({ reason, index, isInView }) => {
+//   return (
+//     <div className={`group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl shadow-xl hover:shadow-3xl transition duration-500 border border-white/20 hover:border-cyan-400/40 hover:bg-white/15 ${isInView ? 'animate-scroll-up' : 'opacity-0'} ${isInView ? `animate-stagger-${(index % 6) + 1}` : ''}`}>
+//       {/* Number positioned outside the card */}
+//       <div className="absolute -top-10 -left-10">
+//         <div className="relative w-32 h-32">
+//           {/* Outer ring */}
+//           <div className="absolute inset-2 rounded-full border-2 border-cyan-400/20 group-hover:border-cyan-400/40 transition-all duration-500 group-hover:rotate-180" style={{ transformOrigin: 'center' }}></div>
+
+//           {/* Lightning bolts around */}
+//           <svg className="absolute top-0 right-2 w-5 h-5 text-cyan-400/70 group-hover:text-cyan-300 transition-all group-hover:scale-125" viewBox="0 0 24 24" fill="currentColor">
+//             <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
+//           </svg>
+//           <svg className="absolute bottom-2 left-0 w-4 h-4 text-purple-400/70 group-hover:text-purple-300 transition-all group-hover:scale-125" viewBox="0 0 24 24" fill="currentColor">
+//             <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
+//           </svg>
+
+//           {/* Number with enhanced styling */}
+//           <div className="relative flex items-center justify-center h-full">
+//             <div className="relative text-7xl font-black leading-none select-none">
+//               {/* Main gradient number */}
+//               <div className="relative bg-gradient-to-br from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent group-hover:from-cyan-200 group-hover:via-blue-300 group-hover:to-purple-400 transition-all duration-500">
+//                 {reason.number}
+//               </div>
+
+//               {/* Crack overlay SVG */}
+//               <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+//                 {/* Main diagonal cracks */}
+//                 <line x1="25" y1="15" x2="75" y2="85" stroke="url(#crack-gradient-1)" strokeWidth="2" strokeLinecap="round" strokeDasharray="3,2" />
+//                 <line x1="35" y1="5" x2="65" y2="95" stroke="url(#crack-gradient-2)" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4,3" />
+//                 <line x1="75" y1="25" x2="25" y2="75" stroke="url(#crack-gradient-3)" strokeWidth="2" strokeLinecap="round" strokeDasharray="3,2" />
+
+//                 {/* Branch cracks */}
+//                 <polyline points="40,30 45,40 42,50" fill="none" stroke="rgba(6, 182, 212, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+//                 <polyline points="60,50 55,60 58,70" fill="none" stroke="rgba(139, 92, 246, 0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+//                 <polyline points="50,20 48,30 52,40" fill="none" stroke="rgba(96, 165, 250, 0.5)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+
+//                 {/* Small fracture details */}
+//                 <circle cx="35" cy="35" r="1.5" fill="rgba(6, 182, 212, 0.7)" />
+//                 <circle cx="65" cy="65" r="1.5" fill="rgba(139, 92, 246, 0.7)" />
+//                 <circle cx="50" cy="50" r="1" fill="rgba(96, 165, 250, 0.6)" />
+
+//                 {/* Define gradients for cracks */}
+//                 <defs>
+//                   <linearGradient id="crack-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+//                     <stop offset="0%" style={{ stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.8 }} />
+//                     <stop offset="100%" style={{ stopColor: 'rgb(139, 92, 246)', stopOpacity: 0.8 }} />
+//                   </linearGradient>
+//                   <linearGradient id="crack-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
+//                     <stop offset="0%" style={{ stopColor: 'rgb(139, 92, 246)', stopOpacity: 0.7 }} />
+//                     <stop offset="100%" style={{ stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.7 }} />
+//                   </linearGradient>
+//                   <linearGradient id="crack-gradient-3" x1="100%" y1="0%" x2="0%" y2="100%">
+//                     <stop offset="0%" style={{ stopColor: 'rgb(96, 165, 250)', stopOpacity: 0.8 }} />
+//                     <stop offset="100%" style={{ stopColor: 'rgb(168, 85, 247)', stopOpacity: 0.8 }} />
+//                   </linearGradient>
+//                 </defs>
+//               </svg>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="relative z-10">
+//         <h3 className="text-2xl font-black text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r from-cyan-400 to-purple-600 group-hover:bg-clip-text transition-all duration-500">{reason.title}</h3>
+//         <p className="text-gray-300 leading-relaxed group-hover:text-white transition-all duration-300">{reason.description}</p>
+//       </div>
+//     </div>
+//   )
+// }
 
 const WhyChooseUs = () => {
   const reasons = [

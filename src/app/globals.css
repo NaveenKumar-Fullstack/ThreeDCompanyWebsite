@@ -51,6 +51,66 @@
   transform: rotateY(-90deg) translateZ(130px);
 }
 
+@keyframes borderMove {
+  0% {
+    background-position: 0%
+  }
+
+  100% {
+    background-position: 200%
+  }
+}
+
+.animate-borderMove {
+  background-size: 200% 100%;
+  animation: borderMove 4s linear infinite;
+}
+
+@keyframes shine {
+  100% {
+    left: 120%;
+  }
+}
+
+.group-hover\:animate-shine:hover {
+  animation: shine 1s ease forwards;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.8s ease forwards;
+}
+
 /* Rotation animation */
 @keyframes rotateCube {
   0% {

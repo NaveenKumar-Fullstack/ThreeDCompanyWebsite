@@ -15,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Technologies | Stack Mints Labs",
     description: "Explore the cutting-edge technologies we use to build amazing solutions.",
-    url: 'https://vpm-solutions.com/technologies',
+    url: 'https://SML-solutions.com/technologies',
   },
 }
 

@@ -26,7 +26,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-0.6  group cursor-pointer hover:opacity-80 transition">
             {/* <div className="w-14 h-14 bg-linear-to-br from-cyan-500 to-purple-600 rounded-2xl flex items-center justify-center font-bold text-white text-2xl shadow-lg group-hover:shadow-cyan-500/50 transition-all duration-300 transform group-hover:scale-110">
-              <img src="/image/companylogo.png" alt="VPM logo" width={60} height={60} />
+              <img src="/image/companylogo.png" alt="SML logo" width={60} height={60} />
             </div>
             <div className="hidden sm:block">
               <span className="text-white font-bold text-xl block">Stack</span>

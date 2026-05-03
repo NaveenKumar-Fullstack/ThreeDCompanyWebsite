@@ -15,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Our Services | Stack Mints Labs",
     description: "Professional IT services including web development, mobile apps, IT consulting, and more.",
-    url: 'https://vpm-solutions.com/services',
+    url: 'https://SML-solutions.com/services',
   },
 }
 
@@ -28,7 +28,7 @@ export default function ServicesPage() {
         <Footer />
       </div>
       <ScrollToTop />
-      <WhatsAppButton phone="916204899360" message="Hi VPM team! I'd like to discuss a project." />
+      <WhatsAppButton phone="916204899360" message="Hi SML team! I'd like to discuss a project." />
     </div>
   )
 }

@@ -27,14 +27,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://vpm-solutions.com'),
+  metadataBase: new URL('https://SML-solutions.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "VPM - IT Solutions & Web Development",
+    title: "SML - IT Solutions & Web Development",
     description: "Transform your business with cutting-edge IT solutions, website development, mobile applications, and innovative technology services.",
-    url: 'https://vpm-solutions.com',
+    url: 'https://SML-solutions.com',
     siteName: 'Stack Mints LAb',
     locale: 'en_IN',
     type: 'website',

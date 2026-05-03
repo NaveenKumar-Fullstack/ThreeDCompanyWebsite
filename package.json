@@ -1,5 +1,5 @@
 {
-  "name": "vpm",
+  "name": "SML",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@types/three": "^0.184.0",
     "lucide-react": "^1.14.0",
     "next": "16.1.4",
     "react": "19.2.3",

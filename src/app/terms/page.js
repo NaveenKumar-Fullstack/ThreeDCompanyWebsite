@@ -145,7 +145,7 @@ const TermsAndConditions = () => {
                 If you have questions about these Terms and Conditions, please contact us at:
               </p>
               <div className="bg-slate-900/50 rounded-xl p-6 border border-white/10">
-                <p className="text-gray-300 mb-2"><strong>Email:</strong> vpmitsolution@gmail.com</p>
+                <p className="text-gray-300 mb-2"><strong>Email:</strong> SMLitsolution@gmail.com</p>
                 <p className="text-gray-300 mb-2"><strong>Phone:</strong> +91 6204899360</p>
                 <p className="text-gray-300"><strong>Address:</strong> Stack Mints Labs, Jharkhand, India</p>
               </div>

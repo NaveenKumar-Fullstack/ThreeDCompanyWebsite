@@ -15,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Portfolio | Stack Mints Labs",
     description: "View our portfolio of 100+ successful projects and case studies.",
-    url: 'https://vpm-solutions.com/portfolio',
+    url: 'https://SML-solutions.com/portfolio',
   },
 }
 
@@ -28,7 +28,7 @@ export default function PortfolioPage() {
         <Footer />
       </div>
       <ScrollToTop />
-      <WhatsAppButton phone="916204899360" message="Hi VPM team! I'd like to discuss a project." />
+      <WhatsAppButton phone="916204899360" message="Hi SML team! I'd like to discuss a project." />
     </div>
   )
 }

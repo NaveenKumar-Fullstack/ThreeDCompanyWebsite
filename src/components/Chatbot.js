@@ -21,7 +21,7 @@ const Chatbot = () => {
   const quickReplies = [
     { text: '💼 Services', response: 'We offer Web Development, Mobile App Development, UI/UX Design, SEO Optimization, and E-commerce Solutions. Which service interests you?' },
     { text: '💰 Pricing', response: 'We have three plans:\n• Standard: ₹7,999 (5 pages)\n• Premium: ₹13,999 (12 pages) - Best Value!\n• Custom: Based on requirements\n\nWould you like more details about any plan?' },
-    { text: '📞 Contact', response: 'You can reach us at:\n📱 Phone: +91 9131558153\n📧 Email: vpmitsolution@gmail.com\n\nOr fill out our contact form and we\'ll get back to you within 24 hours!' },
+    { text: '📞 Contact', response: 'You can reach us at:\n📱 Phone: +91 9131558153\n📧 Email: SMLitsolution@gmail.com\n\nOr fill out our contact form and we\'ll get back to you within 24 hours!' },
     { text: '⏱️ Timeline', response: 'Our typical project timeline is:\n• Standard websites: 7-10 days\n• Premium websites: 14-21 days\n• Custom projects: 3-8 weeks\n\nWe pride ourselves on fast, quality delivery! 🚀' }
   ]
 
